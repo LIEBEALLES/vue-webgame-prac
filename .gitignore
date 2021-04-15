@@ -1,0 +1,6 @@
+# Project exclude paths
+/3.숫자야구/dist/
+/3.숫자야구/node_modules/
+
+node_modules
+dist

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>끝말잇기</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+</head>
+<body>
+<div id="root">
+    <word-relay></word-relay>
+    <word-relay></word-relay>
+    <word-relay></word-relay>
+
+</div>
+<script>
+    Vue.component('word-relay', { //전역 컴포넌트, global-component
+        template: `
+          <div>
+          <div>{{ word }}</div>
+          <form @submit="onSubmitForm">
+          <input type="text" ref="answer" v-model="inputValue">
+          <button type="submit">입력</button>
+          </form>
+          <div>{{ result }}</div>
+          </div>
+        `,
+        data() {
+            return {
+                word: '최유정',
+                result: '',
+                inputValue: ''
+            }
+        },
+        methods: {
+            onSubmitForm(e) {
+                e.preventDefault();
+                const lastWord = this.word.charAt(this.word.length - 1); //마지막 문자 가져오기
+                const nextFirstWord = this.inputValue.charAt(0);
+                //나는 마지막문자, 앞문자를 가지고 왔는데 이런 방법도 있다.
+                //마지막문자 = this.word[this.word.length-1]
+                //첫번째문자 = this.word[0]
+                if (lastWord == nextFirstWord) {
+                    this.result = '딩동댕!'
+                    this.word = this.inputValue;
+                    this.inputValue = ''
+                    this.$refs.answer.focus();
+                } else {
+                    this.result = '땡'
+                    this.inputValue = '';
+                }
+            }
+        }
+    })
+</script>
+<script>
+    const app = new Vue({
+        el: '#root',
+    })
+</script>
+</body>
+</html>
