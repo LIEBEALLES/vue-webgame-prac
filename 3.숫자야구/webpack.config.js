@@ -25,4 +25,9 @@ module.exports = {
         filename: '[name].js', // 'app.js'
         path: path.join(__dirname, 'dist'), //현재경로는 __dirname 으로 접근가능, 뒤에 dist 적어주면 알아서 경로를 합쳐줌
     },
+    devServer: {
+        historyApiFallback: true,
+        contentBase: './',
+        port: 8084
+    }
 }
